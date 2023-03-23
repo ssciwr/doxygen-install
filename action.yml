@@ -8,11 +8,15 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Export Doxygen version in environment
+      shell: bash
+      run: |
+        echo "DOXYGEN_VERSION=${{ inputs.version }}" >> $GITHUB_ENV
+
     - name: "Linux installation"
       if: runner.os == 'Linux'
       shell: bash
       run: |
-        echo "DOXYGEN_VERSION=${{ inputs.version }}" >> ${GITHUB_ENV}
         wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
         tar xzvf doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
         cd doxygen-${DOXYGEN_VERSION}
@@ -22,18 +26,20 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        echo "DOXYGEN_VERSION=${{ inputs.version }}" >> ${GITHUB_ENV}
-        wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/doxygen-${DOXYGEN_VERSION}.windows.x64.bin.zip
         mkdir doxygen
         cd doxygen
-        unzip doxygen-${DOXYGEN_VERSION}.windows.x64.bin.zip
-        cp * c:\Windows
+        curl -kLSs https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/doxygen-${DOXYGEN_VERSION}.windows.x64.bin.zip -o doxygen.zip
+        unzip doxygen.zip
+        cp * c:\\Windows
     
     - name: "MacOS installation"
       if: runner.os == 'MacOS'
       shell: bash
       run: |
-        echo "DOXYGEN_VERSION=${{ inputs.version }}" >> ${GITHUB_ENV}
         wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/Doxygen-${DOXYGEN_VERSION}.dmg
         sudo hdiutil attach Doxygen-${DOXYGEN_VERSION}.dmg
-        ls -l /Volumes/Doxygen-${DOXYGEN_VERSION}
+        sudo cp /Volumes/Doxygen/Doxygen.app/Contents/MacOS/Doxywizard /usr/local/bin
+        sudo cp /Volumes/Doxygen/Doxygen.app/Contents/Resources/doxygen /usr/local/bin
+        sudo cp /Volumes/Doxygen/Doxygen.app/Contents/Resources/doxyindexer /usr/local/bin
+        find /Volumes/Doxygen -name "*"
+        sudo hdiutil detach /Volumes/Doxygen
