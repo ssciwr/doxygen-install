@@ -1,0 +1,39 @@
+name: "doxygen-install"
+description: "Installs Doxygen"
+inputs:
+  version:
+    description: "The Doxygen version to install"
+    required: false
+    default: "1.9.6"
+runs:
+  using: "composite"
+  steps:
+    - name: "Linux installation"
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        echo "DOXYGEN_VERSION=${{ inputs.version }}" >> ${GITHUB_ENV}
+        wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
+        tar xzvf doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
+        cd doxygen-${DOXYGEN_VERSION}
+        sudo make install
+    
+    - name: "Windows installation"
+      if: runner.os == 'Windows'
+      shell: bash
+      run: |
+        echo "DOXYGEN_VERSION=${{ inputs.version }}" >> ${GITHUB_ENV}
+        wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/doxygen-${DOXYGEN_VERSION}.windows.x64.bin.zip
+        mkdir doxygen
+        cd doxygen
+        unzip doxygen-${DOXYGEN_VERSION}.windows.x64.bin.zip
+        cp * c:\Windows
+    
+    - name: "MacOS installation"
+      if: runner.os == 'MacOS'
+      shell: bash
+      run: |
+        echo "DOXYGEN_VERSION=${{ inputs.version }}" >> ${GITHUB_ENV}
+        wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/Doxygen-${DOXYGEN_VERSION}.dmg
+        sudo hdiutil attach Doxygen-${DOXYGEN_VERSION}.dmg
+        ls -l /Volumes/Doxygen-${DOXYGEN_VERSION}

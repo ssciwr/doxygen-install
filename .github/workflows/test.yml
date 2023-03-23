@@ -1,0 +1,30 @@
+name: Test Doxygen installation
+
+on:
+  push:
+    branches:
+      - main
+  pull_reqeust:
+    branches:
+      - main
+
+jobs:
+  test-installation:
+    name: Testing the Doxygen installation
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ./
+
+      - name: Check doxygen existence
+        shell: bash
+        run: |
+          which doxygen
