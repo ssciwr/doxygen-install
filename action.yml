@@ -41,5 +41,4 @@ runs:
         sudo cp /Volumes/Doxygen/Doxygen.app/Contents/MacOS/Doxywizard /usr/local/bin
         sudo cp /Volumes/Doxygen/Doxygen.app/Contents/Resources/doxygen /usr/local/bin
         sudo cp /Volumes/Doxygen/Doxygen.app/Contents/Resources/doxyindexer /usr/local/bin
-        find /Volumes/Doxygen -name "*"
         sudo hdiutil detach /Volumes/Doxygen
