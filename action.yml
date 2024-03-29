@@ -28,13 +28,13 @@ runs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        mkdir doxygen
-        cd doxygen
+        mkdir doxygen-${DOXYGEN_VERSION}-windows
+        cd doxygen-${DOXYGEN_VERSION}-windows
         curl -kLSs https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/doxygen-${DOXYGEN_VERSION}.windows.x64.bin.zip -o doxygen.zip
         unzip doxygen.zip
         cp * c:\\Windows
         cd ..
-        rm -rf doxygen # Clean up
+        rm -rf doxygen-${DOXYGEN_VERSION}-windows # Clean up
     
     - name: "MacOS installation"
       if: runner.os == 'MacOS'
