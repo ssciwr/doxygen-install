@@ -21,6 +21,8 @@ runs:
         tar xzvf doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
         cd doxygen-${DOXYGEN_VERSION}
         sudo make install
+        cd ..
+        rm -rf doxygen-${DOXYGEN_VERSION}* # Clean up
     
     - name: "Windows installation"
       if: runner.os == 'Windows'
@@ -31,6 +33,8 @@ runs:
         curl -kLSs https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/doxygen-${DOXYGEN_VERSION}.windows.x64.bin.zip -o doxygen.zip
         unzip doxygen.zip
         cp * c:\\Windows
+        cd ..
+        rm -rf doxygen # Clean up
     
     - name: "MacOS installation"
       if: runner.os == 'MacOS'
@@ -42,3 +46,4 @@ runs:
         sudo cp /Volumes/Doxygen/Doxygen.app/Contents/Resources/doxygen /usr/local/bin
         sudo cp /Volumes/Doxygen/Doxygen.app/Contents/Resources/doxyindexer /usr/local/bin
         sudo hdiutil detach /Volumes/Doxygen
+        rm Doxygen-${DOXYGEN_VERSION}.dmg # Clean up
