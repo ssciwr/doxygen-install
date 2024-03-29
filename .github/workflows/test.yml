@@ -33,3 +33,4 @@ jobs:
         shell: bash
         run: |
           ! ls doxygen* 1> /dev/null 2>&1
+          ! ls Doxygen* 1> /dev/null 2>&1
