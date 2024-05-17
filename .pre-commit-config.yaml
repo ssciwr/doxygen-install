@@ -1,0 +1,14 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.6.0
+  hooks:
+  - id: end-of-file-fixer      # Ensure existence of newline characters at file ends
+  - id: check-yaml      # Make sure that contained YAML files are well-formed
+  - id: trailing-whitespace      # Trim trailing whitespace of all sorts
+  - id: check-added-large-files      # Apply a file size limit of 500kB
+  - id: mixed-line-ending      # Ensure consistent line endings
+
+- repo: https://github.com/rhysd/actionlint
+  rev: v1.7.0
+  hooks:
+  - id: actionlint      # GitHub Actions Workflow linter

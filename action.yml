@@ -23,7 +23,7 @@ runs:
         sudo make install
         cd ..
         rm -rf doxygen-${DOXYGEN_VERSION}* # Clean up
-    
+
     - name: "Windows installation"
       if: runner.os == 'Windows'
       shell: bash
@@ -35,7 +35,7 @@ runs:
         cp * c:\\Windows
         cd ..
         rm -rf doxygen-${DOXYGEN_VERSION}-windows # Clean up
-    
+
     - name: "MacOS installation"
       if: runner.os == 'MacOS'
       shell: bash
