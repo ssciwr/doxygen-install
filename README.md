@@ -13,5 +13,5 @@ Optionally, you can specify the desired Doxygen version
 ```
   - uses: ssciwr/doxygen-install@v1
     with:
-      version: "1.10.0"
+      version: "1.11.0"
 ```
