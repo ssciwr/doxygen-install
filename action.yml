@@ -13,8 +13,8 @@ runs:
       run: |
         echo "DOXYGEN_VERSION=${{ inputs.version }}" >> $GITHUB_ENV
 
-    - name: "Linux installation"
-      if: runner.os == 'Linux'
+    - name: "Linux x64 installation"
+      if: runner.os == 'Linux' && runner.arch == 'X64'
       shell: bash
       run: |
         wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
@@ -23,6 +23,17 @@ runs:
         sudo make install
         cd ..
         rm -rf doxygen-${DOXYGEN_VERSION}* # Clean up
+
+    - name: "Linux ARM installation"
+      if: runner.os == 'Linux' && runner.arch == 'ARM64'
+      shell: bash
+      run: |
+        wget http://mirror.archlinuxarm.org/aarch64/extra/doxygen-${DOXYGEN_VERSION}-1-aarch64.pkg.tar.xz
+        tar -xJf doxygen-${DOXYGEN_VERSION}-1-aarch64.pkg.tar.xz
+        cd doxygen-${DOXYGEN_VERSION}-1-aarch64.pkg
+        sudo cp usr/bin/* /usr/local/bin/
+        cd ..
+        rm doxygen-${DOXYGEN_VERSION}-1-aarch64.pkg.tar.xz # Clean up
 
     - name: "Windows installation"
       if: runner.os == 'Windows'
