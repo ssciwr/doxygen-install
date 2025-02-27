@@ -29,6 +29,7 @@ jobs:
         shell: bash
         run: |
           which doxygen
+          doxygen -h
 
       - name: Check cleanup
         shell: bash
