@@ -28,12 +28,13 @@ runs:
       if: runner.os == 'Linux' && runner.arch == 'ARM64'
       shell: bash
       run: |
+        mkdir download
+        cd download
         wget http://mirror.archlinuxarm.org/aarch64/extra/doxygen-${DOXYGEN_VERSION}-1-aarch64.pkg.tar.xz
         tar -xJf doxygen-${DOXYGEN_VERSION}-1-aarch64.pkg.tar.xz
-        cd doxygen-${DOXYGEN_VERSION}-1-aarch64.pkg
         sudo cp usr/bin/* /usr/local/bin/
         cd ..
-        rm doxygen-${DOXYGEN_VERSION}-1-aarch64.pkg.tar.xz # Clean up
+        rm -rf download # Clean up
 
     - name: "Windows installation"
       if: runner.os == 'Windows'
