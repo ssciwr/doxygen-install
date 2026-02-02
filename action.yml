@@ -36,14 +36,26 @@ runs:
         cd ..
         rm -rf doxygen-${DOXYGEN_VERSION}-windows # Clean up
 
-    - name: "MacOS installation"
-      if: runner.os == 'MacOS'
+    - name: "MacOS installation (ARM)"
+      if: runner.os == 'MacOS' && runner.arch == 'ARM64'
       shell: bash
       run: |
-        wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/Doxygen-${DOXYGEN_VERSION}.dmg
-        sudo hdiutil attach Doxygen-${DOXYGEN_VERSION}.dmg
+        wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/Doxygen-${DOXYGEN_VERSION}-arm.dmg
+        sudo hdiutil attach Doxygen-${DOXYGEN_VERSION}-arm.dmg
         sudo cp /Volumes/Doxygen/Doxygen.app/Contents/MacOS/Doxywizard /usr/local/bin
         sudo cp /Volumes/Doxygen/Doxygen.app/Contents/Resources/doxygen /usr/local/bin
         sudo cp /Volumes/Doxygen/Doxygen.app/Contents/Resources/doxyindexer /usr/local/bin
         sudo hdiutil detach /Volumes/Doxygen
-        rm Doxygen-${DOXYGEN_VERSION}.dmg # Clean up
+        rm Doxygen-${DOXYGEN_VERSION}-arm.dmg # Clean up
+
+    - name: "MacOS installation (Intel)"
+      if: runner.os == 'MacOS' && runner.arch == 'X64'
+      shell: bash
+      run: |
+        wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/Doxygen-${DOXYGEN_VERSION}-intel.dmg
+        sudo hdiutil attach Doxygen-${DOXYGEN_VERSION}-intel.dmg
+        sudo cp /Volumes/Doxygen/Doxygen.app/Contents/MacOS/Doxywizard /usr/local/bin
+        sudo cp /Volumes/Doxygen/Doxygen.app/Contents/Resources/doxygen /usr/local/bin
+        sudo cp /Volumes/Doxygen/Doxygen.app/Contents/Resources/doxyindexer /usr/local/bin
+        sudo hdiutil detach /Volumes/Doxygen
+        rm Doxygen-${DOXYGEN_VERSION}-intel.dmg # Clean up
