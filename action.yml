@@ -40,7 +40,7 @@ runs:
       if: runner.os == 'MacOS' && runner.arch == 'ARM64'
       shell: bash
       run: |
-        wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/Doxygen-${DOXYGEN_VERSION}-arm.dmg
+        wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/Doxygen-${DOXYGEN_VERSION}-arm.dmg || { wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/Doxygen-${DOXYGEN_VERSION}.dmg && mv Doxygen-${DOXYGEN_VERSION}.dmg Doxygen-${DOXYGEN_VERSION}-arm.dmg ; } # Fallback to generic version if we fail to download the arm one
         sudo hdiutil attach Doxygen-${DOXYGEN_VERSION}-arm.dmg
         sudo cp /Volumes/Doxygen/Doxygen.app/Contents/MacOS/Doxywizard /usr/local/bin
         sudo cp /Volumes/Doxygen/Doxygen.app/Contents/Resources/doxygen /usr/local/bin
@@ -52,7 +52,7 @@ runs:
       if: runner.os == 'MacOS' && runner.arch == 'X64'
       shell: bash
       run: |
-        wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/Doxygen-${DOXYGEN_VERSION}-intel.dmg
+        wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/Doxygen-${DOXYGEN_VERSION}-intel.dmg || { wget https://github.com/doxygen/doxygen/releases/download/Release_${DOXYGEN_VERSION//./_}/Doxygen-${DOXYGEN_VERSION}.dmg && mv Doxygen-${DOXYGEN_VERSION}.dmg Doxygen-${DOXYGEN_VERSION}-intel.dmg ; } # Fallback to generic version if we fail to download the intel one
         sudo hdiutil attach Doxygen-${DOXYGEN_VERSION}-intel.dmg
         sudo cp /Volumes/Doxygen/Doxygen.app/Contents/MacOS/Doxywizard /usr/local/bin
         sudo cp /Volumes/Doxygen/Doxygen.app/Contents/Resources/doxygen /usr/local/bin
