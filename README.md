@@ -5,13 +5,13 @@ A GitHub action to install Doxygen. It downloads from [Doxygen's Github release 
 ## Example usage
 
 ```
-  - uses: ssciwr/doxygen-install@v1
+  - uses: ssciwr/doxygen-install@v2
 ```
 
 Optionally, you can specify the desired Doxygen version
 
 ```
-  - uses: ssciwr/doxygen-install@v1
+  - uses: ssciwr/doxygen-install@v2
     with:
       version: "1.16.1"
 ```
