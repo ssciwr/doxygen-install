@@ -4,7 +4,7 @@ inputs:
   version:
     description: "The Doxygen version to install"
     required: false
-    default: "1.16.1"
+    default: "1.17.0"
 runs:
   using: "composite"
   steps:
